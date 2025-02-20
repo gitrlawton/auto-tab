@@ -1,19 +1,59 @@
 <!-- 
     This is the popup for the chrome extension
     It is the first thing that the user sees when they click the extension icon
--->
+    -->
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chrome Extension Template</title>
+    <title>Text Autocomplete</title>
+    <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
-    <h1>Chrome Extension Popup</h1>
-    <p>This is a popup for the chrome extension</p>
-    <button>Click me!</button>
-    <link rel="stylesheet" href="index.css" />
-    <script src="script.js"></script>
+    <h2>Text Autocomplete</h2>
+
+    <div class="toggle-container">
+      <span class="option-label">Enable autocomplete</span>
+      <label class="toggle-switch">
+        <input type="checkbox" id="enableExtension" checked />
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="option-row">
+      <span class="option-label">Suggestion speed</span>
+      <input type="range" id="suggestionSpeed" min="1" max="5" value="3" />
+    </div>
+
+    <div class="option-row">
+      <span class="option-label">Context length</span>
+      <select id="contextLength">
+        <option value="minimal">Minimal (faster)</option>
+        <option value="balanced" selected>Balanced</option>
+        <option value="extended">Extended (better)</option>
+      </select>
+    </div>
+
+    <div class="option-row">
+      <span class="option-label">This website</span>
+      <label class="toggle-switch">
+        <input type="checkbox" id="enableCurrentSite" checked />
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="status">
+      <div id="statusIndicator" class="status-indicator active"></div>
+      <span id="statusText">Active on this page</span>
+    </div>
+
+    <div class="footer">
+      <a href="#" id="openOptions">Advanced options</a>
+      <a href="#" id="reportIssue">Report an issue</a>
+    </div>
+
+    <script src="popup.js"></script>
   </body>
 </html>
