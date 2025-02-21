@@ -4,55 +4,27 @@
     -->
 
 <!doctype html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Text Autocomplete</title>
+    <title>AutoTab:</title>
     <link rel="stylesheet" href="popup.css" />
+    <link rel="stylesheet" href="suggestion-styles.css" />
   </head>
   <body>
-    <h2>Text Autocomplete</h2>
+    <h2>AutoTab:</h2>
 
-    <div class="toggle-container">
-      <span class="option-label">Enable autocomplete</span>
-      <label class="toggle-switch">
-        <input type="checkbox" id="enableExtension" checked />
-        <span class="slider"></span>
-      </label>
+    <div class="status">Status: <span id="status">Active</span></div>
+
+    <div class="tips">
+      <strong>Tips:</strong>
+      <ul>
+        <li>Press <kbd>Tab</kbd> to accept a suggestion</li>
+        <li>Press <kbd>Esc</kbd> to dismiss a suggestion</li>
+        <li>Works on most text inputs and textareas</li>
+      </ul>
     </div>
 
-    <div class="option-row">
-      <span class="option-label">Suggestion speed</span>
-      <input type="range" id="suggestionSpeed" min="1" max="5" value="3" />
-    </div>
-
-    <div class="option-row">
-      <span class="option-label">Context length</span>
-      <select id="contextLength">
-        <option value="minimal">Minimal (faster)</option>
-        <option value="balanced" selected>Balanced</option>
-        <option value="extended">Extended (better)</option>
-      </select>
-    </div>
-
-    <div class="option-row">
-      <span class="option-label">This website</span>
-      <label class="toggle-switch">
-        <input type="checkbox" id="enableCurrentSite" checked />
-        <span class="slider"></span>
-      </label>
-    </div>
-
-    <div class="status">
-      <div id="statusIndicator" class="status-indicator active"></div>
-      <span id="statusText">Active on this page</span>
-    </div>
-
-    <div class="footer">
-      <a href="#" id="openOptions">Advanced options</a>
-      <a href="#" id="reportIssue">Report an issue</a>
-    </div>
+    <div class="footer">Created for class project</div>
 
     <script src="popup.js"></script>
   </body>

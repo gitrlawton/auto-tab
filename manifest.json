@@ -1,28 +1,22 @@
 {
   "manifest_version": 3,
-  "name": "AutoTab: Text Autocomplete",
+  "name": "AutoTab: AI Text Autocomplete",
   "version": "1.0",
-  "description": "Provides AI-powered text autocompletion using Gemini Nano",
-  "permissions": ["storage"],
-  "action": {
-    "default_popup": "popup/index.html"
-  },
-  "icons": {
-    "16": "assets/icon.png",
-    "32": "assets/icon.png",
-    "48": "assets/icon.png",
-    "128": "assets/icon.png"
-  },
+  "description": "Provides AI-powered text completion suggestions for text fields across the web",
+  "permissions": ["activeTab"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["scripts/content.js"]
+      "js": ["scripts/content.js"],
+      "css": ["suggestion-styles.css"]
     }
   ],
-  "web_accessible_resources": [
-    {
-      "resources": ["assets/icon.png"],
-      "matches": ["<all_urls>"]
+  "action": {
+    "default_popup": "popup/index.html",
+    "default_icon": {
+      "16": "assets/icon.png",
+      "48": "assets/icon.png",
+      "128": "assets/icon.png"
     }
-  ]
+  }
 }

@@ -4,126 +4,34 @@
 */
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   width: 300px;
   padding: 15px;
-  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", sans-serif;
+}
+h2 {
+  font-size: 18px;
+  margin-top: 0;
   color: #333;
 }
-
-h2 {
-  margin-top: 0;
-  color: #1a73e8;
-  font-size: 18px;
-  font-weight: 500;
-  margin-bottom: 15px;
-}
-
-.toggle-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 15px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #eee;
-}
-
-.toggle-switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 24px;
-}
-
-.toggle-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: 0.3s;
-  border-radius: 24px;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 16px;
-  width: 16px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: 0.3s;
-  border-radius: 50%;
-}
-
-input:checked + .slider {
-  background-color: #1a73e8;
-}
-
-input:checked + .slider:before {
-  transform: translateX(26px);
-}
-
-.option-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
-.option-label {
-  font-size: 14px;
-}
-
-select,
-input[type="range"] {
-  width: 130px;
-}
-
 .status {
-  display: flex;
-  align-items: center;
+  padding: 8px;
+  background-color: #e6f7ff;
+  border-left: 4px solid #1890ff;
+  margin-bottom: 15px;
+  border-radius: 2px;
+}
+.tips {
   margin-top: 15px;
   font-size: 13px;
   color: #666;
 }
-
-.status-indicator {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  margin-right: 8px;
+li {
+  margin-bottom: 8px;
 }
-
-.active {
-  background-color: #34a853;
-}
-
-.inactive {
-  background-color: #ea4335;
-}
-
 .footer {
-  margin-top: 15px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.footer a {
-  color: #1a73e8;
-  text-decoration: none;
-  font-size: 13px;
-}
-
-.footer a:hover {
-  text-decoration: underline;
+  margin-top: 20px;
+  font-size: 12px;
+  color: #999;
+  text-align: center;
 }
