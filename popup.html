@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gemini Text Autocomplete</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Gemini Text Autocomplete</h1>
+        <div id="status-indicator" class="status-indicator">
+          <span class="indicator-dot"></span>
+          <span id="status-text">Checking...</span>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="settings">
+          <div class="setting">
+            <label for="enabled-toggle">Enable Autocomplete</label>
+            <label class="switch">
+              <input type="checkbox" id="enabled-toggle" checked />
+              <span class="slider round"></span>
+            </label>
+          </div>
+
+          <div class="setting">
+            <label for="min-chars">Minimum Characters</label>
+            <input
+              type="range"
+              id="min-chars"
+              min="5"
+              max="30"
+              value="10"
+              class="slider"
+            />
+            <span id="min-chars-value">10</span>
+          </div>
+
+          <div class="setting">
+            <label for="delay-slider">Suggestion Delay (ms)</label>
+            <input
+              type="range"
+              id="delay-slider"
+              min="200"
+              max="1000"
+              step="100"
+              value="500"
+              class="slider"
+            />
+            <span id="delay-value">500</span>
+          </div>
+        </div>
+
+        <div id="model-info" class="info-box">
+          <h2>Model Information</h2>
+          <div id="model-details">Loading...</div>
+        </div>
+
+        <div class="tips">
+          <h3>Tips</h3>
+          <ul>
+            <li>Press <kbd>Tab</kbd> to accept a suggestion</li>
+            <li>Press <kbd>Esc</kbd> to dismiss a suggestion</li>
+            <li>Click on a suggestion to accept it</li>
+          </ul>
+        </div>
+      </div>
+
+      <footer>
+        <button id="test-btn">Test Autocomplete</button>
+        <div class="version">v1.0</div>
+      </footer>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>
