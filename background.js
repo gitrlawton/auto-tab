@@ -60,15 +60,15 @@ async function checkModelAvailability() {
 
   try {
     // Check if API exists first
-    if (!chrome.aiOriginTrial || !chrome.aiOriginTrial.languageModel) {
-      console.error("API not available:", {
-        aiOriginTrialExists: !!chrome.aiOriginTrial,
-        languageModelExists: !!(
-          chrome.aiOriginTrial && chrome.aiOriginTrial.languageModel
-        ),
-      });
-      return { isAvailable: false, error: "API not available" };
-    }
+    // if (!chrome.aiOriginTrial || !chrome.aiOriginTrial.languageModel) {
+    //   console.error("API not available:", {
+    //     aiOriginTrialExists: !!chrome.aiOriginTrial,
+    //     languageModelExists: !!(
+    //       chrome.aiOriginTrial && chrome.aiOriginTrial.languageModel
+    //     ),
+    //   });
+    //   return { isAvailable: false, error: "API not available" };
+    // }
 
     const capabilities =
       await chrome.aiOriginTrial.languageModel.capabilities();

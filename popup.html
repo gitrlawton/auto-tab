@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gemini Text Autocomplete</title>
+    <title>AutoTab</title>
     <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
     <div class="container">
       <header>
-        <h1>Gemini Text Autocomplete</h1>
+        <h1>AutoTab</h1>
         <div id="status-indicator" class="status-indicator">
           <span class="indicator-dot"></span>
           <span id="status-text">Checking...</span>
@@ -28,14 +28,7 @@
 
           <div class="setting">
             <label for="min-chars">Minimum Characters</label>
-            <input
-              type="range"
-              id="min-chars"
-              min="5"
-              max="30"
-              value="10"
-              class="slider"
-            />
+            <input type="range" id="min-chars" min="5" max="30" value="10" />
             <span id="min-chars-value">10</span>
           </div>
 
@@ -48,7 +41,6 @@
               max="1000"
               step="100"
               value="500"
-              class="slider"
             />
             <span id="delay-value">500</span>
           </div>

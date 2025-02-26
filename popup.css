@@ -83,6 +83,26 @@ h1 {
   align-items: center;
 }
 
+/* Only apply the flex layout to settings with range inputs */
+.setting:has(input[type="range"]) {
+  display: flex;
+  align-items: center;
+}
+
+.setting:has(input[type="range"]) label {
+  flex: 1;
+}
+
+.setting:has(input[type="range"]) input[type="range"] {
+  flex: 2;
+  margin: 0 12px; /* Add padding on left and right of the slider */
+}
+
+.setting:has(input[type="range"]) span {
+  flex: 0 0 30px;
+  text-align: right;
+}
+
 /* Toggle Switch */
 .switch {
   position: relative;
@@ -97,7 +117,7 @@ h1 {
   height: 0;
 }
 
-.slider {
+.switch .slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -108,7 +128,7 @@ h1 {
   transition: 0.4s;
 }
 
-.slider:before {
+.switch .slider:before {
   position: absolute;
   content: "";
   height: 16px;
@@ -142,11 +162,11 @@ input:checked + .slider:before {
 /* Range inputs */
 input[type="range"] {
   -webkit-appearance: none;
-  width: 150px;
   height: 7px;
   background: #e0e0e0;
   border-radius: 5px;
   outline: none;
+  position: relative; /* explicitly override absolute positioning */
 }
 
 input[type="range"]::-webkit-slider-thumb {
