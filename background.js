@@ -181,8 +181,8 @@ async function getTextCompletion(text) {
       .replace(/^\.\.\.+\s*/g, "")
       .replace(/\s*\.\.\.+$/g, "");
 
-    // 2. Remove any quotation marks
-    processedCompletion = processedCompletion.replace(/["']/g, "");
+    // 2. Remove any outer quotation marks
+    processedCompletion = processedCompletion.replace(/^"(.*)"$/g, "$1");
 
     // 3. Remove square brackets and their contents
     processedCompletion = processedCompletion.replace(/\[.*?\]/g, "");

@@ -4,7 +4,6 @@
 const config = {
   minCharsForSuggestion: 10, // Minimum characters before showing suggestions
   debounceTime: 500, // Time in ms to wait after typing stops
-  suggestionTimeout: 10000, // Time in ms before suggestions fade out
   ignoredElements: ["password"], // Input types to ignore
 };
 
@@ -190,9 +189,6 @@ function showSuggestion(originalText, completion) {
   suggestionBox.textContent = suggestionText;
   suggestionBox.style.display = "block";
   suggestionBox.classList.add("visible");
-
-  // Set timeout to hide suggestion
-  setTimeout(hideSuggestion, config.suggestionTimeout);
 }
 
 // Position suggestion box near the cursor
@@ -239,8 +235,20 @@ function acceptSuggestion() {
     activeElement.tagName === "INPUT"
   ) {
     activeElement.value = currentText + suggestion;
+
+    // Set cursor position to the end
+    activeElement.selectionStart = activeElement.selectionEnd =
+      activeElement.value.length;
   } else if (activeElement.isContentEditable) {
     activeElement.textContent = currentText + suggestion;
+
+    // For contentEditable elements, we need to use range/selection
+    const range = document.createRange();
+    const selection = window.getSelection();
+    range.selectNodeContents(activeElement);
+    range.collapse(false); // collapse to the end
+    selection.removeAllRanges();
+    selection.addRange(range);
   }
 
   hideSuggestion();
