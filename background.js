@@ -35,9 +35,8 @@ async function initializeLanguageModel() {
     // Create a model session with system prompt optimized for autocomplete
     modelSession = await chrome.aiOriginTrial.languageModel.create({
       systemPrompt:
-        "You are an AI assistant that helps users complete their text as they type. " +
-        "Provide natural, helpful, and contextually appropriate continuations. " +
-        "Keep suggestions concise and relevant to the current context.",
+        "You are an AI assistant that helps users by suggesting what to type next, as they type. " +
+        "Provide natural, helpful, and contextually appropriate suggestions.",
       temperature: 0.2, // Lower temperature for more focused completions
       topK: capabilities.defaultTopK,
     });
@@ -59,17 +58,6 @@ async function checkModelAvailability() {
   console.log("Checking model availability...");
 
   try {
-    // Check if API exists first
-    // if (!chrome.aiOriginTrial || !chrome.aiOriginTrial.languageModel) {
-    //   console.error("API not available:", {
-    //     aiOriginTrialExists: !!chrome.aiOriginTrial,
-    //     languageModelExists: !!(
-    //       chrome.aiOriginTrial && chrome.aiOriginTrial.languageModel
-    //     ),
-    //   });
-    //   return { isAvailable: false, error: "API not available" };
-    // }
-
     const capabilities =
       await chrome.aiOriginTrial.languageModel.capabilities();
     console.log("Model capabilities result:", capabilities);
@@ -166,7 +154,10 @@ async function getTextCompletion(text) {
     }
 
     // Generate completion prompt
-    const prompt = `Complete the following text naturally:\n"${text}"\nContinuation:`;
+    const prompt = `Try to guess the next few words for the following text.
+        Keep your response to a single, concise suggestion and relevant to the current context.
+        Important: Never repeat what the user has already written, and do not try to complete their sentence.
+        :\n"${text}"\nContinuation:`;
     console.log("Sending prompt to model:", prompt);
 
     // Get completion (non-streaming for autocompletion)
@@ -175,7 +166,41 @@ async function getTextCompletion(text) {
     });
 
     console.log("Received completion:", completion);
-    return completion.trim();
+
+    // Process the completion to be more concise
+    let processedCompletion = completion.trim();
+
+    // Remove the original text if it's repeated
+    if (processedCompletion.includes(text)) {
+      processedCompletion = processedCompletion.replace(text, "");
+    }
+
+    // Clean up the suggestion:
+    // 1. Remove leading and trailing ellipses
+    processedCompletion = processedCompletion
+      .replace(/^\.\.\.+\s*/g, "")
+      .replace(/\s*\.\.\.+$/g, "");
+
+    // 2. Remove any quotation marks
+    processedCompletion = processedCompletion.replace(/["']/g, "");
+
+    // 3. Remove square brackets and their contents
+    processedCompletion = processedCompletion.replace(/\[.*?\]/g, "");
+
+    // 4. Remove any trailing periods
+    processedCompletion = processedCompletion.replace(/\.\s*$/g, "");
+
+    // 5. Remove any explanatory text with parentheses
+    processedCompletion = processedCompletion.replace(/\(.*?\)/g, "");
+
+    // 6. Remove any leading or trailing whitespace that might remain
+    processedCompletion = processedCompletion.trim();
+
+    // 7. Remove double spaces that might have been created during cleanup
+    processedCompletion = processedCompletion.replace(/\s{2,}/g, " ");
+
+    console.log("Processed completion:", processedCompletion);
+    return processedCompletion;
   } catch (error) {
     console.error("Detailed error in getTextCompletion:", {
       name: error.name,

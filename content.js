@@ -165,14 +165,20 @@ function showSuggestion(originalText, completion) {
 
   // Determine what to show as suggestion (only the new part)
   let suggestionText = "";
+
   if (completion.startsWith(originalText)) {
+    // Extract just the new part
     suggestionText = completion.substring(originalText.length);
   } else {
     // If the model returned something that doesn't start with original text
-    suggestionText = "... " + completion;
+    // Don't add ellipsis, just use the completion directly
+    suggestionText = completion;
   }
 
-  if (!suggestionText.trim()) {
+  // Ensure suggestionText is clean and non-empty
+  suggestionText = suggestionText.trim();
+
+  if (!suggestionText) {
     hideSuggestion();
     return;
   }
@@ -214,7 +220,18 @@ function acceptSuggestion() {
     return;
 
   const currentText = getInputText(activeElement);
-  const suggestion = suggestionBox.textContent;
+  let suggestion = suggestionBox.textContent;
+
+  // Add a leading space if needed (when the suggestion doesn't start with space
+  // and the current text doesn't end with space)
+  if (
+    suggestion.length > 0 &&
+    !suggestion.startsWith(" ") &&
+    currentText.length > 0 &&
+    !currentText.endsWith(" ")
+  ) {
+    suggestion = " " + suggestion;
+  }
 
   // Apply suggestion
   if (
@@ -231,6 +248,9 @@ function acceptSuggestion() {
   // Trigger input event to notify the page
   const inputEvent = new Event("input", { bubbles: true });
   activeElement.dispatchEvent(inputEvent);
+
+  // Update lastText to prevent repeated suggestions
+  lastText = getInputText(activeElement);
 }
 
 // Hide suggestion box
